@@ -1,0 +1,171 @@
+<!doctype html>
+<!-- Define el tipo de documento como HTML5 -->
+
+<html lang="es">
+  <!-- Idioma principal del documento -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Permite el uso de caracteres especiales como acentos -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Hace que la página sea responsive (adaptable a móviles) -->
+
+    <title>JCC Sales Hub - Acceso Master</title>
+    <!-- Título que aparece en la pestaña del navegador -->
+
+    <style>
+      /* Estilos generales: centran la tarjeta en pantalla y definen la fuente */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Contenedor principal: tarjeta blanca con sombra para resaltar */
+      .login-card {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 380px;
+      }
+
+      /* Encabezado: centra el contenido */
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      /* Título principal del sistema */
+      .header h1 {
+        color: #1a237e;
+        margin: 0;
+        font-size: 24px;
+        border-bottom: 2px solid #1a237e;
+        display: inline-block;
+        padding-bottom: 5px;
+      }
+
+      /* Grupos del formulario: separación entre campos */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      /* Etiquetas de los inputs */
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: bold;
+      }
+
+      /* Inputs (usuario y contraseña) */
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+
+      /* Botón de envío */
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1a237e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      /* Efecto hover del botón */
+      button:hover {
+        background-color: #0d1442;
+      }
+
+      /* Contenedor de enlaces inferiores */
+      .footer-links {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+      }
+
+      /* Estilo de los enlaces */
+      .footer-links a {
+        color: #1a237e;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Contenedor principal de la tarjeta de login -->
+    <div class="login-card">
+      <!-- Encabezado del sistema -->
+      <div class="header">
+        <h1>JCC Sales Hub</h1>
+        <!-- Nombre del sistema -->
+
+        <p>Panel Administrativo Master</p>
+        <!-- Descripción del acceso -->
+      </div>
+
+      <!-- Formulario de inicio de sesión -->
+      <form method="POST">
+        {% csrf_token %}
+        <!-- Token de seguridad de Django para evitar ataques CSRF -->
+
+        <!-- Campo usuario -->
+        <div class="form-group">
+          <label>Usuario:</label>
+
+          <input type="text" name="username" required placeholder="Ej: jose" />
+          <!-- Campo obligatorio para el nombre de usuario -->
+        </div>
+
+        <!-- Campo contraseña -->
+        <div class="form-group">
+          <label>Contraseña:</label>
+
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="••••••••"
+          />
+          <!-- Campo obligatorio oculto para la contraseña -->
+        </div>
+
+        <!-- Botón de envío del formulario -->
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+
+      <!-- Enlaces adicionales -->
+      <div class="footer-links">
+        <p>
+          <p>
+  ¿No tienes cuenta? <a href="{% url 'registro' %}"><b>Regístrate aquí</b></a>
+</p>
+<hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+          <a href="#">¿Olvidó su contraseña de acceso?</a>
+        </p>
+        <!-- Link para recuperación de contraseña -->
+
+        <p>© 2026 - Ingeniería de Software</p>
+        <!-- Pie de página -->
+      </div>
+    </div>
+  </body>
+</html>

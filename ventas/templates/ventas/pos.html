@@ -1,0 +1,309 @@
+<!doctype html>
+<!-- Define el tipo de documento como HTML5 -->
+
+<html lang="es">
+  <!-- Idioma principal del documento -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Soporte para caracteres especiales -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Responsive design -->
+
+    <title>Dashboard - JCC Sales Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <style>
+      body {
+        background-color: #f4f6f9;
+      }
+      .sidebar {
+        min-height: 100vh;
+        background: #2c3e50;
+        color: white;
+      }
+      .nav-link {
+        color: #bdc3c7;
+        font-size: 0.9rem;
+        padding: 12px 20px;
+      }
+      .nav-link:hover {
+        background: #34495e;
+        color: white;
+      }
+      .active-link {
+        background: #3498db;
+        color: white !important;
+        border-radius: 5px;
+      }
+      .main-content {
+        background: #f4f6f9;
+        padding: 25px;
+      }
+      .card-pos {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .total-section {
+        background: #ffffff;
+        border-left: 2px solid #dee2e6;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- ================= SIDEBAR ================= -->
+        <nav class="col-md-2 d-none d-md-block sidebar p-0">
+          <div class="p-4 text-center">
+            <h5 class="fw-bold">JCC Sales Hub</h5>
+            <hr class="text-white-50" />
+
+            <!-- Usuario Django -->
+            <div class="small">
+              <i class="bi bi-person-circle"></i>
+              {{ user.username|upper }}
+            </div>
+          </div>
+
+         <li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">
+        <i class="bi bi-house-door me-2"></i> Tablero
+    </a>
+</li
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active-link" href="#"
+                ><i class="bi bi-cart-fill me-2"></i> Ventas</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="bi bi-box-seam me-2"></i> Productos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="bi bi-people me-2"></i> Clientes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="bi bi-graph-up me-2"></i> Reportes</a
+              >
+            </li>
+
+            <li class="nav-item mt-4">
+              <a class="nav-link text-danger" href="{% url 'login' %}">
+                <i class="bi bi-box-arrow-left me-2"></i> Salir
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- ================= CONTENIDO ================= -->
+        <main class="col-md-7 main-content">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold">Punto de Venta</h4>
+            <span class="badge bg-primary">Barinas, Venezuela</span>
+          </div>
+
+          <!-- BUSCADOR -->
+          <div class="card card-pos p-3 mb-4">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0">
+                <i class="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control border-start-0 py-3"
+                placeholder="Escanee código de barras o busque producto..."
+              />
+            </div>
+          </div>
+
+          <!-- TABLA -->
+          <div class="card card-pos overflow-hidden">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Cant.</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                      <i class="bi bi-cart-x fs-1 d-block mb-2"></i>
+                      Esperando entrada de productos...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- ================= PANEL DERECHO ================= -->
+        <aside class="col-md-3 total-section p-4">
+          <h5 class="fw-bold mb-4">Resumen de Operación</h5>
+
+          <!-- TASA -->
+          <div
+            class="mb-3 p-2 bg-warning bg-opacity-10 border border-warning rounded"
+          >
+            <label class="form-label small fw-bold text-dark"
+              >Tasa BCV (Bs/$)</label
+            >
+
+            <div class="input-group input-group-sm">
+              <span
+                class="input-group-text bg-warning border-warning text-dark fw-bold"
+                >Bs.</span
+              >
+              <input
+                type="number"
+                id="tasaBCV"
+                value="36.50"
+                step="0.01"
+                class="form-control border-warning fw-bold"
+              />
+            </div>
+          </div>
+
+          <!-- MÉTODO PAGO -->
+          <div class="mb-4">
+            <label class="form-label small text-muted">Método de Pago</label>
+            <select class="form-select form-select-lg">
+              <option>Efectivo ($)</option>
+              <option>Pago Móvil (Bs)</option>
+              <option>Transferencia (Bs)</option>
+              <option>Zelle</option>
+            </select>
+          </div>
+
+          <!-- RESUMEN -->
+          <div class="card bg-light p-3 border-0 mb-4">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">Subtotal:</span>
+              <span id="subtotalUSD">$ 0.00</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">IVA 16%:</span>
+              <span id="ivaUSD">$ 0.00</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">IGTF 3%:</span>
+              <span id="igtfUSD">$ 0.00</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">IVA Bs:</span>
+              <span id="ivaVES">Bs. 0.00</span>
+            </div>
+
+            <hr />
+
+            <div
+              class="d-flex justify-content-between h3 fw-bold text-primary mb-2"
+            >
+              <span>TOTAL $:</span>
+              <span id="totalUSD">$ 0.00</span>
+            </div>
+
+            <div
+              class="d-flex justify-content-between p-2 bg-primary bg-opacity-10 rounded"
+            >
+              <span class="small fw-bold text-primary">TOTAL Bs:</span>
+              <span id="totalVES" class="fw-bold text-success">Bs. 0.00</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary w-100 btn-lg mb-2">
+            <i class="bi bi-check-circle me-2"></i> PROCESAR VENTA
+          </button>
+
+          <button class="btn btn-outline-danger w-100">
+            <i class="bi bi-trash me-2"></i> Vaciar Carrito
+          </button>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ================= SCRIPT (AQUÍ VA SIEMPRE) ================= -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function calcularTotales() {
+          // Obtener valores dinámicos
+          let subtotal =
+            parseFloat(document.getElementById("subtotalInput").value) || 0;
+          let tasa = parseFloat(document.getElementById("tasaBCV").value) || 0;
+          let aplicarIGTF = document.getElementById("aplicarIGTF").checked;
+
+          // Calcular IVA
+          let iva = subtotal * 0.16;
+
+          // IGTF opcional
+          let igtf = aplicarIGTF ? subtotal * 0.03 : 0;
+
+          // Total en dólares (sí incluye IGTF si aplica)
+          let totalUSD = subtotal + iva + igtf;
+
+          // 🔥 IMPORTANTE:
+          // Bs SOLO usa subtotal + IVA (NO IGTF)
+          let totalVES = (subtotal + iva) * tasa;
+
+          let ivaVES = iva * tasa;
+
+          // Renderizar
+          document.getElementById("subtotalUSD").innerText =
+            "$ " + subtotal.toFixed(2);
+          document.getElementById("ivaUSD").innerText = "$ " + iva.toFixed(2);
+          document.getElementById("igtfUSD").innerText = "$ " + igtf.toFixed(2);
+          document.getElementById("totalUSD").innerText =
+            "$ " + totalUSD.toFixed(2);
+
+          document.getElementById("totalVES").innerText =
+            "Bs. " + totalVES.toFixed(2);
+          document.getElementById("ivaVES").innerText =
+            "Bs. " + ivaVES.toFixed(2);
+        }
+
+        // Eventos
+        document
+          .getElementById("subtotalInput")
+          .addEventListener("input", calcularTotales);
+        document
+          .getElementById("tasaBCV")
+          .addEventListener("input", calcularTotales);
+        document
+          .getElementById("aplicarIGTF")
+          .addEventListener("change", calcularTotales);
+      });
+    </script>
+  </body>
+</html>
